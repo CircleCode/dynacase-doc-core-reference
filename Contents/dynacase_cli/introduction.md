@@ -1,7 +1,8 @@
 # Dynacase en ligne de commande {#core-ref:1566c46d-a53d-44cf-8c3f-0d0e21c0b117}
 
-Un certain nombre d'opérations peuvent être effectuées en ligne de commande.
-Le point d'entrée de la ligne de commande dans Dynacase est le script `wsh.php`.
+L'exécution de programmes permettant de gérer les documents et le paramétrage en
+général peut être fait en ligne de commande. Le point d'entrée de la ligne de
+commande dans Dynacase est le script `wsh.php`.
 
 ## `wsh.php` {#core-ref:bab8c1c9-fe71-4629-9773-5cd67a8693bf}
 
@@ -20,7 +21,7 @@ Son aide est disponible au moyen de l'option `--help` :
 ### Utilisateur effectuant l'opération {#core-ref:f266fa37-8d4c-45f9-806f-154861bfc547}
 
 Par défaut, les opérations sont lancées sous l'identité de l'utilisateur
-*Master Default*. Il est possible de changer cette identité au moyen de l'option
+*Master Default* (administrateur principal - compte `admin`). Il est possible de changer cette identité au moyen de l'option
 `--userid`, qui prend comme paramètre le *login* d'un utilisateur, ou son
 *identifiant système*.
 
@@ -34,6 +35,11 @@ valeur `"bar"` à l'argument `foo`.
 envoyés au format texte. Aussi, lors de l'utilisation du paramètre `--foo=true`,
 le script appelé recevra l'argument `"true"` (string) et non pas le booléen
 `true`.
+
+Si la valeur de l'argument comporte des espaces les double-quotes `"`ou les
+quotes `'` peuvent être utilisées.
+
+    ./wsh.php --api=my_test --my_number=3 --my_text="l'argument deux"
 
 Pour la récupération des arguments, se référer à la documentation de la
 [classe `ApiUsage`][ApiUsage].
@@ -69,18 +75,50 @@ Afin de connaître l'usage d'un script, il est possible d'utiliser l'option
 
 ### Exécuter des actions avec wsh {#core-ref:63832d9f-61a8-4846-a9d5-c34ee58de4a6}
 
-Il est possible au moyen de wsh de lancer n'importe quelle action de n'importe
+Il est possible au moyen de *wsh* de lancer n'importe quelle action de n'importe
 quelle application.
 
 Exemple d'appel :
 
     ./wsh.php --app=MY_APP --action=MY_ACTION
 
+Les arguments spécifiques de l'action doivent être indiqués avec le notation
+suivante :
+
+    --argumentName=argumentValue
+
+Le résultat de l'action est retournée sur la sortie standard.
+
+Exemple d'exécution de l'action `FDL_FAMILYSCHEMA` de l'application `FDL` :
+
+    ./wsh.php --app=FDL --action=FDL_FAMILYSCHEMA --id=DIR > dir.xsd
+
+### Retour d'erreur
+
+Le script retourne `0` si aucune erreur a été relevée. Sinon un code
+différent est retourné comme pour les programmes systèmes.
+
+Codes retournés :
+
+*   `0` : Pas d'erreur
+*   `1` : Déclenchement d'une exception, appel à `Action::exitError()`, action inconnue
+*   `2` : Utilisateur inconnu ou non actif (option `--userid`)
+*   `4` : Le script indiqué par `--api` est introuvable.
+
+Exemple :
+
+    $ ./wsh.php --api=pastrouve; echo $?
+    fichier API API/pastrouve.php non trouvé
+    4
+
+Le texte de l'erreur est affichée sur la sortie standard et non sur la sortie
+d'erreur _stderr_.
+
 ## Écrire un script CLI {#core-ref:4df1314f-9fdd-4a7f-af37-a18cc39f3505}
 
 Les scripts exécutables avec wsh doivent être des fichiers php présents dans le
-répertoire `/API`. Ces fichiers doivent porter l'extension `php` (le *basename*
-du fichier détermine le *nom de l'api*).
+sous-répertoire `./API` du contexte d'installation. Ces fichiers doivent porter
+l'extension `php` (le *basename* du fichier détermine le *nom de l'api*).
 
 Lors du lancement d'un script, la variable `$action` est initialisée avec un
 objet de la [classe `Action`][classe_action]. L'autoloader est initialisé, et
