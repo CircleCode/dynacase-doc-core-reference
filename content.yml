@@ -221,7 +221,7 @@ book:
     - level:  1
       content:  "dynacase_cli/introduction.md"
       flags:
-        wip: "work in progress"
+        need-review: "need review"
 ##
 # applications_actions
 ##
