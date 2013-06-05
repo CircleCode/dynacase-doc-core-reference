@@ -111,12 +111,17 @@ L'émetteur ou les destinataires peuvent être choisis parmi :
         texte*, mais est récupéré sur la famille du workflow associé au
         document.
 
-## Désactivation des liens {#core-ref:976387b2-fdc0-4697-96f9-583f2181b375}
+## Activation/désactivation des liens {#core-ref:976387b2-fdc0-4697-96f9-583f2181b375}
 
 Lorsque le mail est envoyé à des personnes qui n'ont pas de compte sur le SI, il
 est inutile de leur envoyer des liens vers des ressources auxquelles ils n'ont
-pas accès. Il est donc possible de désactiver tous les les liens, au moyen de
+pas accès. Il est donc possible de désactiver tous les liens, au moyen de
 l'attribut *avec liens*, qui doit alors être décoché.
+
+Dans le cas d'un modèle de mail, l'URL de l'ancre des attributs relation sera
+composée à partir du paramètre `CORE_MAILACTIONURL` comme décrit dans la section
+[`Notes`](#core-ref:a3c9ae9e-3ed8-4611-9b39-7f742e381d9a) de la documentation
+de [`Doc::getDocAnchor`](#core-ref:55e9c46c-2a10-4911-8243-7c913416648f).
 
 ## Enregistrement des messages envoyés {#core-ref:cfd63c8d-05b6-4c29-9517-c90ca6076eae}
 
