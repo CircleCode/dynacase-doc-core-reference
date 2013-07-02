@@ -163,7 +163,7 @@ book:
     - level:   2
       content:  "representations/ooo_layout.md"
       flags:
-        wip: "work in progress"
+        draft: "draft"
 ##
 # importation_exportation_documents
 ##
