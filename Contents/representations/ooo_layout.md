@@ -25,7 +25,7 @@ Exemple :
 
     MY_APP:my_Document.odt:B
 
-Dans cet exemple le fichier `MY_APP/Layout/my_Document.odt sera utilisé comme
+Dans cet exemple le fichier `MY_APP/Layout/my_Document.odt` sera utilisé comme
 template.
 
 ## Référence d'un template à partir d'un paramètre de famille {#core-ref:1ac6f94e-77cc-4f8d-a7b1-cad03e16c233}
@@ -125,7 +125,7 @@ Parmi ces différences, il y a notamment :
 
 ### Placer une clé dans le template _odt_ {#core-ref:3caf8ced-fa1c-4969-bd72-7767755e109d}
 
-Les clés utilisent la même notation que dans les template non odt : `[KEY]`.
+Les clés utilisent la même notation que dans les templates non odt : `[KEY]`.
 
 Bien que cela ne soit pas obligatoire, il est recommandé d'utiliser des [champs
 utilisateur][fields] dont :
@@ -150,12 +150,17 @@ L'utilisation de champs plutôt que du texte libre présente plusieurs avantages
 
 ### Placer une clé dans les propriétés du template _odt_ {#core-ref:efc93ece-8dc6-4291-b152-c6c5cc3bc4ef}
 
-Il est également possible d'utiliser les clés dans les propriété du fichier, où
+Il est également possible d'utiliser les clés dans les propriétés du fichier, où
 elles seront aussi remplacées.
 
 ### Images {#core-ref:d1625c57-57f6-48eb-ab3e-e3690dddec6c}
 
-Pour incorporer des images, il faut :
+Pour incorporer des images issues d'un attribut de type `image`, il faudra
+insérer dans le template une image quelconque qui servira de placeholder et qui
+sera ensuite remplacée par l'image issue de l'attribut du document lors de la
+composition du template.
+
+Pour cela, il faut :
 
 1.  Insérer une image quelconque dans le fichier, au moyen du menu
     <span class="menu"><span class="menu-item">Insertion</span>
@@ -165,17 +170,18 @@ Pour incorporer des images, il faut :
 2.  Cliquer sur le menu contextuel de l'image et choisir
     <span class="menu"><span class="menu-item">image</span></span>
     
-3.  Renseigner la clé dans l'onglet *[Options]*, champ *nom*.
+3.  Renseigner les clés (qui référencent la valeur et le label de l'attribut de
+type `image`) dans l'onglet *[Options]*, champ *nom*.
     
     ![ nom de l'image ](representations/odt_insert_image.png)
 
 En ce qui concerne la taille de l'image, la largeur sera conservée.
 La hauteur sera calculée en fonction du ratio de l'image.
 
-**Attention** : chaque image doit être insérée de cette façon, et il ne faut
-surtout pas faire de copier coller d'une image. En effet, en cas de copier
-coller, les 2 images font référence en interne à la même image, même en
-définissant des *noms* différents.
+**Attention** : chaque image « placeholder » doit être insérée de cette façon,
+et il ne faut surtout pas faire de copier-coller d'une image. En effet, en cas
+de copier-coller, les 2 images font référence en interne à la même image, même
+en définissant des *noms* différents.
 
 ### Répétables {#core-ref:9287cbe8-a6ca-41f9-9547-b7a970ae6584}
 
@@ -221,7 +227,7 @@ consultation du document généré :
 Le type *htmltext* implique des restrictions d'usage : La valeur de l'attribut
 est filtrée lors de l'incorporation dans un fichier openDocument. Seules
 certaines balises HTML sont supportées. Les balises non supportées sont ignorées
-et leur contenu n'est pas affichés.
+et leur contenu n'est pas affiché.
 
 Une clef correspondant à un attribut *htmltext* doit être placée seule dans le
 paragraphe, et ne doit pas contenir de texte autour.
