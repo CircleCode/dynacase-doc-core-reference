@@ -107,6 +107,90 @@ La propriété `$stateActivity` définit l'ensemble des activités. C'est un tab
 associatif ; la clé est l'identifiant' de l'état et la valeur est le libellé
 de l'activité.
 
+### Les méthodes de transition {#core-ref:1300a480-0f82-427e-b7ba-4a3bd031535c}
+
+Les méthodes appelées lors des transitions en `m0`, `m1`, `m2`, `m3` sont des
+méthodes de la famille de workflow. Elles peuvent être privées <span class="fixme" data-assignedto="EBR">c'est vrai?</span> ou publiques.
+
+#### `m0` {#core-ref:391f603e-b23a-44e8-aa14-47b4ab1fd03b}
+
+La méthode appelée en `m0` est de la forme :
+
+    m0 ( $nextStep, $currentStep, $confirmationMessage)
+
+où :
+
+*   `$nextStep` est l'identifiant de la prochaine étape, (étape d'arrivée)
+*   `$currentStep` est l'identifiant de l'étape actuelle, (étape de départ)
+*   `$confirmationMessage` est le message de confirmation (si la méthode est
+    exécuté pour l'affichage des menus, le message est vide)
+
+Si elle retourne une chaîne vide, alors la transition peut être effectuée. dans
+le cas contraire, elle doit retourner un message localisé qui indiquera à
+l'utilisateur la raison pour laquelle la transition ne peut pas être effectuée.
+
+*Note* : Cette méthode est aussi appelée lors de l'affichage de la liste des
+états accessibles. Cela permet notamment de signaler à l'utilisateur les
+transitions qu'il a le droit d'effectuer, mais pour lesquelles il doit faire des
+modifications sur le document. De fait, cette méthode ne **doit pas modifier le
+document**.
+
+#### `m1` {#core-ref:c288fbc9-18d8-4fa9-8f25-e5d8bb741155}
+
+La méthode appelée en `m1` est de la forme :
+
+    m1 ( $nextStep, $currentStep, $confirmationMessage)
+
+où :
+
+*   `$nextStep` est l'identifiant de la prochaine étape, (étape d'arrivée)
+*   `$currentStep` est l'identifiant de l'étape actuelle, (étape de départ)
+*   `$confirmationMessage` est le message de confirmation
+
+Si elle retourne une chaîne vide, alors la transition peut être effectuée. dans
+le cas contraire, elle doit retourner un message localisé qui indiquera à
+l'utilisateur la raison pour laquelle la transition ne peut pas être effectuée.
+
+#### `m2` {#core-ref:a67a3a77-ad04-468b-9af3-415468444d1a}
+
+La méthode appelée en `m2` est de la forme :
+
+    m2 ( $currentStep, $previousStep, $confirmationMessage)
+
+où :
+
+*   `$currentStep` est l'identifiant de l'étape actuelle, (étape d'arrivée)
+*   `$previousStep` est l'identifiant de l'ancienne étape, (étape de départ)
+*   `$confirmationMessage` est le message de confirmation
+
+Si elle retourne une chaîne non vide, cette chaîne est considérée comme un
+message d'erreur qui sera affiché à l'utilisateur à l'issue de la transition
+(Cette méthode n'est pas bloquante).
+
+#### `m3` {#core-ref:da8dbc68-777a-4573-bc63-b2e313b7f37a}
+
+La méthode appelée en `m3` est de la forme :
+
+    m3 ( $currentStep, $previousStep, $confirmationMessage)
+
+où :
+
+*   `$currentStep` est l'identifiant de l'étape actuelle, (étape d'arrivée)
+*   `$previousStep` est l'identifiant de l'ancienne étape, (étape de départ)
+*   `$confirmationMessage` est le message de confirmation
+
+Si elle retourne une chaîne non vide, cette chaîne est considérée comme un
+message d'erreur qui sera affiché à l'utilisateur à l'issue de la transition
+(Cette méthode n'est pas bloquante).
+
+#### Récupération des paramètres de transition {#core-ref:b9f13e07-747f-42e5-ae2a-7a30c801be7d}
+
+Dans les méthodes `m1`, `m2`, `m3` (et `m0` lorsqu'elle est appelée en début de
+transition), il est possible de récupérer les valeurs des paramètres de
+transition au moyen de la méthode `WDoc::getValue()` (bien que ces valeurs
+soient utilisées dans des paramètres, ce n'est pas la méthode
+`getParameterValue` qui est utilisée).
+
 ### Exemple {#core-ref:39cce5a0-2fae-461b-99e8-fbe91f67a172}
 
 Considérons le [workflow de l'introduction][wf_intro]. La classe le définissant
@@ -282,10 +366,8 @@ Quelques remarques sur ce code :
     
     Puisque les états et transitions vont générer des attributs, ils vont
     également générer des colonnes en base de données. Ces colonnes sont nommées
-    à partir des identifiants de l'état ou de la transition. 
-    <span class="fixme" data-assignedto="MCO">A reformuler - le "client" ne fait pas parti du manuel de référence</span>
-    Aussi, si demain le
-    client décide que l'état *archivé* doit devenir *classé*, il faudra soit
+    à partir des identifiants de l'état ou de la transition. Aussi, si demain il
+    est nécessaire de renommer l'état *archivé* en *classé*, il faudra soit
     accepter que le nom affiché et le nom stocké soient différents, soit
     renommer des colonnes en base de données et mettre à jour des fichiers de
     paramétrage. Aucun de ces 2 choix n'est pérenne ou dénué de risque.

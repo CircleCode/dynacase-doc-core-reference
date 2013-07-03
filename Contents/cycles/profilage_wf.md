@@ -1,4 +1,4 @@
-# Profilage du workflow
+# Profilage du workflow {#core-ref:a2693a49-baa5-47f8-b3ca-c234898d7d6a}
 
 Pour chaque document de workflow, il est possible de définir qui a le droit de
 passer chacune des transitions au moyen d'un [profil dédié][profil_dedie].

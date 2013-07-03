@@ -244,29 +244,33 @@ book:
     - level:   1
       content:  "cycles/introduction.md"
       flags:
-        draft: "draft"
+        need-review: "need review"
       subtoc:   2
     - level:   2
       content:  "cycles/implementation.md"
       flags:
-        draft: "draft"
+        need-review: "need review"
     - level:   2
       content:  "cycles/parametrage_importation.md"
       subtoc:   2
       flags:
-        draft: "draft"
+        need-review: "need review"
     - level:   3
       content:  "cycles/family_wf.md"
       flags:
-        draft: "draft"
+        need-review: "need review"
     - level:   3
       content:  "cycles/document_wf.md"
       flags:
-        draft: "draft"
+        need-review: "need review"
     - level:   3
       content:  "cycles/profilage_wf.md"
       flags:
-        draft: "draft"
+        need-review: "need review"
+    - level:   2
+      content:  "cycles/wf_api.md"
+      flags:
+        need-review: "need review"
 ##
 # API
 ##

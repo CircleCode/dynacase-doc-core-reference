@@ -8,8 +8,8 @@ La *famille de workflow* permet de spécifier :
 *   le graphe du cycle :
     *   la liste des étapes,
     *   la liste des méthodes déclenchées par chaque transition,
-*   les attributs spécifiques au cycle. Ces attributs peuvent être utilisés dans 
-    les traitements des transitions et sont différents pour chaque instance de 
+*   les attributs spécifiques au cycle. Ces attributs peuvent être utilisés dans
+    les traitements des transitions et sont différents pour chaque instance de
     cycle de vie.
 *   les paramètres de familles qui seront utilisables lors des traitements
     spécifiques liés aux cycles : pour chaque étape et chaque transition, un
@@ -18,7 +18,7 @@ La *famille de workflow* permet de spécifier :
 Le *document de workflow* permet de spécifier le paramétrage :
 
 *   des minuteurs, mails, etc. déclenchés à chaque étape ou transition
-*   des acteurs et de [leurs droits][wprofil] au fil des différentes étapes 
+*   des acteurs et de [leurs droits][wprofil] au fil des différentes étapes
     du cycle
 
 Généralement une *famille de workflow* ne produit qu'un seul *document
@@ -41,29 +41,34 @@ contrôleur, ou de rédacteur.
 Un type de transition est composé  :
 
 *   de deux conditions de passage de transition : `m0` et `m1`,
-*   de deux traitements : `m2` et `m3`,
 *   d'une confirmation du passage de la transition : `nr`,
-*   d'une demande de paramètres de transition : `ask`.
+*   d'une demande de paramètres de transition : `ask`,
+*   de deux traitements : `m2` et `m3`.
 
-Une transition suit le déroulement suivant :
+Lors de l'utilisation de l'IHM, une transition se déroule en plusieurs transactions :
 
-
-![Processus de transition ](cycle/Sequence_transition.png)
-
-
-
-La méthode `m0` est aussi utilisée lors de l'affichage des menus de transitions
-afin de n'afficher que les transitions autorisées. Les messages d'erreur des
-méthodes `m0` sont affichés sur le menu (lors du survol) afin d'indiquer la
-raison de l'erreur.
-
-
-![Processus d'affichage du menu des transitions](cycle/Sequence_transition_menu.png)
-
-<span class="fixme" data-assignedto="MCO">Détail de m0->m3 dans famille de workflow. 
-  Mettre en suivant que l'aspect théorique ( si possible)</span>
-
-
+1.  L'utilisateur demande la liste des transitions disponibles.
+    Pour chaque transition :
+    1.  Dynacase vérifie que l'utilisateur est autorisé à effectuer cette
+        transition
+    2.  Dynacase vérifie que les conditions préalables à la transition sont
+        remplies (`m0`) :
+        *   si les conditions sont remplies, la transition est disponible
+        *   sinon, le message d'erreur est disponible au clic et au survol de la
+            transition, et cette dernière est grisée
+    
+    ![Processus d'affichage du menu des transitions](cycle/Sequence_transition_menu.png)
+    
+2.  L'utilisateur clique sur une des transitions :
+    1.  Si une confirmation de passage de transition ou des paramètres de
+        transition sont requis, une IHM est présentée pour les demander (dans le
+        cas contraire, on passe directement au point suivant) :
+        
+        ![Processus de demande des paramètres ](cycle/Sequence_transition_ask.png)
+        
+    2.  la transition à proprement parler est lancée :
+        
+        ![Processus de transition ](cycle/Sequence_transition.png)
 
 ### `m0` {#core-ref:c3bcdf20-5756-4880-b067-36f0d62b68c5}
 
@@ -72,24 +77,8 @@ raison de l'erreur.
 
 C'est la toute première méthode appelée lors d'une demande de transition.
 
-Elle reçoit en paramètres :
-
-1.  l'identifiant de la prochaine étape, (étape d'arrivée)
-2.  l'identifiant de l'étape actuelle, (étape de départ)
-3.  le message de confirmation (si la méthode est exécuté pour l'affichage 
-    des menus, le message est vide)
-
-<span class="fixme" data-assignedto="MCO">Indiquer plus explicitement la signature</span>
-
-Si elle retourne une chaîne vide, alors la transition peut être effectuée. dans
-le cas contraire, elle doit retourner un message localisé qui indiquera à
-l'utilisateur la raison pour laquelle la transition ne peut pas être effectuée.
-
-*Note* : Cette méthode est aussi appelée lors de l'affichage de la liste des
-états accessibles. Cela permet notamment de signaler à l'utilisateur les
-transitions qu'il a le droit d'effectuer, mais pour lesquelles il doit faire des
-modifications sur le document. De fait, cette méthode ne **doit pas modifier le
-document**.
+En cas d'erreur, la transition est abandonnée, et le message d'erreur est
+retourné à l'utilisateur.
 
 ### Paramètres de transition {#core-ref:9e248e52-ad6b-4089-ab83-11a534b307e9}
 
@@ -110,7 +99,8 @@ dans les paramètres de transition.
 ### Confirmation {#core-ref:a808e6bc-67f8-4666-b5ec-e9bc429a0eb5}
 
 si `nr` n'est pas positionné à `true`, alors une confirmation est demandée.
-Cette confirmation demande la raison de la transition. Cette raison est facultative. 
+Cette confirmation demande la raison de la transition. Cette raison est
+facultative.
 
 Cette raison est affichée dans le même fenêtre que les paramètres de
 transition. Elle est enregistré dans l'historique du document.
@@ -122,20 +112,8 @@ sert à modifier le document juste avant le changement d'état.
 C'est le document tel qu'il est à l'issue de la méthode `m1` qui sera sauvegardé
 dans l'historique du document.
 
-Elle reçoit en paramètres :
-
-1.  l'identifiant de la prochaine étape, (étape d'arrivée)
-2.  l'identifiant de l'étape actuelle, (étape de départ)
-3.  le message de confirmation
-
-<span class="fixme" data-assignedto="MCO">Indiquer plus explicitement la signature</span>
-
-Si elle retourne une chaîne vide, alors la transition peut être effectuée. dans
-le cas contraire, elle doit retourner un message localisé qui indiquera à
-l'utilisateur la raison pour laquelle la transition ne peut pas être effectuée.
-
-
-<span class="fixme" data-assignedto="MCO">Indiquer comment on récupère les ask</span>
+Puisque `m1` est appelée après la demande des paramètres de transition, elle
+peut servir à valider les valeurs saisies par l'utilisateur.
 
 ### `m2` {#core-ref:ced2bc66-792e-4c55-bd0a-dcca09e9732d}
 
@@ -143,16 +121,10 @@ l'utilisateur la raison pour laquelle la transition ne peut pas être effectuée
 modifier le document juste après le changement d'état. C'est le document tel
 qu'il est à la suite de `m2` qui sera soumis aux minuteurs et envoyé par mail.
 
-1.  l'identifiant de l'étape actuelle, (étape de départ)
-2.  l'identifiant de la prochaine étape, (étape d'arrivée)
-3.  le message de confirmation
-
-<span class="fixme" data-assignedto="MCO">Indiquer plus explicitement la signature</span>
 Puisque `m2` intervient après le changement d'état, cette méthode n'est pas
 bloquante. Aussi, retourner une chaîne d'erreur n'interrompt pas le processus
 (mais le message d'erreur sera bien affiché à l'utilisateur à l'issue de la
 transition).
-<span class="fixme" data-assignedto="MCO">Indiquer comment on récupère les ask</span>
 
 ### `m3` {#core-ref:39462cd9-7962-4efe-888b-912d7256671a}
 
@@ -160,15 +132,9 @@ transition).
 dernière exécutée au cours de la transition (c'est à dire qu'elle intervient
 après les différents traitements automatiques effectués par Dynacase).
 
-1.  l'identifiant de l'étape actuelle, (étape d'arrivée)
-2.  l'identifiant de l'ancienne étape, (étape de départ)
-3.  le message de confirmation
-
-<span class="fixme" data-assignedto="MCO">Indiquer plus explicitement la signature</span>
 Elle n'est utile que dans de très rares cas, et est en particulier utilisée
 lorsqu'une seconde transition doit être déclenchée automatiquement à l'issue de
 la première.
-<span class="fixme" data-assignedto="MCO">Indiquer comment on récupère les ask</span>
 
 ## Le graphe {#core-ref:d176f897-3dae-46b5-834c-9b20dcd41c7d}
 

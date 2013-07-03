@@ -18,7 +18,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.decision">
           <y:Geometry height="62.890625" width="188.302734375" x="381.5933706024485" y="-194.61720858247435"/>
-          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#FFFF99" color2="#FFFF99" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.296875" modelName="custom" textColor="#000000" visible="true" width="26.544921875" x="80.87890625" y="21.296875">m0<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -31,7 +31,6 @@
       </data>
     </node>
     <node id="n1">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.terminator">
           <y:Geometry height="76.25593402061855" width="173.05689731958762" x="125.65014529209617" y="-199.18493360824755"/>
@@ -49,7 +48,6 @@ des transitions<y:LabelModel>
       </data>
     </node>
     <node id="n2">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.loopLimit">
           <y:Geometry height="40.0" width="80.0" x="435.7447377899485" y="-278.9479884536084"/>
@@ -67,7 +65,6 @@ des transitions<y:LabelModel>
       </data>
     </node>
     <node id="n3">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.loopLimitEnd">
           <y:Geometry height="40.0" width="80.0" x="435.7447377899485" y="-78.33182020618563"/>
@@ -85,13 +82,12 @@ des transitions<y:LabelModel>
       </data>
     </node>
     <node id="n4">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.terminator">
           <y:Geometry height="75.04740288659792" width="150.09480577319584" x="652.7824329682131" y="-214.85318268041254"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="124.662109375" x="12.716348199097865" y="21.55495144329896">Liste des transitions
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="124.662109375" x="12.716348199097979" y="21.55495144329896">Liste des transitions
 possibles<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -103,7 +99,6 @@ possibles<y:LabelModel>
       </data>
     </node>
     <edge id="e0" source="n1" target="n2">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -114,7 +109,6 @@ possibles<y:LabelModel>
       </data>
     </edge>
     <edge id="e1" source="n2" target="n0">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -125,7 +119,6 @@ possibles<y:LabelModel>
       </data>
     </edge>
     <edge id="e2" source="n0" target="n3">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -136,7 +129,6 @@ possibles<y:LabelModel>
       </data>
     </edge>
     <edge id="e3" source="n3" target="n4">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>

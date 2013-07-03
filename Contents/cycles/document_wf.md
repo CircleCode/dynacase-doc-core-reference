@@ -37,7 +37,7 @@ La description n'est pas utilisée en dehors du document de workflow.
 
 ## La famille {#core-ref:a959a5d9-1349-4dbe-8eea-8a2ef70d0162}
 
-La famille permet de restreindre les documents auquels ce workflow peut être
+La famille permet de restreindre les documents auxquels ce workflow peut être
 attaché : seuls les documents de cette famille et de ses sous-familles peuvent
 dépendre de ce workflow.
 
