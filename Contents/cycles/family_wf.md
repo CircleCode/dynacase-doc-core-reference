@@ -43,15 +43,15 @@ des propriétés de classe `$cycle` et `$transitions`.
 
 ### `$cycle` {#core-ref:d5ddda0c-09d2-42b0-9543-0723e242ec09}
 
-La propriété `$cycle` définit le graphe à proprement parler. C'est un tableau à
-2 dimensions ; chacun des sous-tableaux est de la forme
+La propriété `$cycle` définit le graphe à proprement parler. C'est une liste
+d'éléments de la forme :
 
     [php]
     array(
         "e1" => "<état de départ>",
         "e2" => "<état d'arrivée>",
         "t"  => "<transition à utiliser>"
-    );
+    )
 
 où
 
@@ -60,12 +60,28 @@ où
 *   `t` est l'identifiant de la transition à utiliser pour passer de l'état 
     de départ à l'état d'arrivée.
 
+Exemple :
+
+    [php]
+    public $cycle = array(
+        array(
+            "e1" => "<état de départ 1>",
+            "e2" => "<état d'arrivée 1>",
+            "t"  => "<transition à utiliser 1>"
+        ),
+        …,
+        array(
+            "e1" => "<état de départ N>",
+            "e2" => "<état d'arrivée N>",
+            "t"  => "<transition à utiliser N>"
+        )
+    );
+
 ### `$transitions` {#core-ref:0215aec3-671e-40b5-98e9-2ea651eff224}
 
-La propriété `$transitions` définit l'ensemble des types transitions
-utilisables. C'est un tableau associatif à 2 dimensions ; la *clé* de chacun des
-sous- tableaux correspond au *nom de la transition*, et chacun de ces sous-
-tableaux est de la forme
+La propriété `$transitions` définit l'ensemble des transitions utilisables.
+C'est un tableau associatif dont la *clé* est le *nom de la transition*, et la
+valeur est un élément de la forme :
 
     [php]
     array(
@@ -75,7 +91,7 @@ tableaux est de la forme
         "m2"  => "myFirstProcess",
         "m3"  => "myLastProcess",
         "ask" => array("askId1", …)
-    );
+    )
 
 où
 
@@ -88,6 +104,23 @@ où
 *   `ask` est un tableau d'identifiants de paramètres ou d'attributs du
     workflow, qui seront utilisés pour générer la demande des paramètres de
     transition.
+
+Exemple :
+
+    [php]
+    public $transitions = array(
+        "<transition à utiliser 1>" => array(
+            "nr" => true,
+            "m0" => "myFirstCondition_1",
+            …
+        ),
+        …,
+        "<transition à utiliser N>" => array(
+            "nr" => true,
+            "m0" => "myFirstCondition_N",
+            …
+        )
+    );
 
 ### `$firstState` {#core-ref:41a4297b-4623-4dc0-8a75-4d69d3e9ff0a}
 
@@ -379,7 +412,7 @@ Quelques remarques sur ce code :
 
 ## Internationalisation {#core-ref:4c1b28c1-53bb-48c8-a8a6-8c809cd8dfef}
 
-Dans un workflow, les éléments qui peuvent internationalisés sont :
+Dans un workflow, les éléments qui peuvent être internationalisés sont :
 
 *   le nom des états
 *   le nom des activités

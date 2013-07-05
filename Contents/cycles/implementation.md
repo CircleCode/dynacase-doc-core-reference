@@ -29,8 +29,8 @@ Ils auront en commun la définition du cycle mais pourront avoir des paramétrag
 différents.   Ainsi, par exemple :
 
 *   sur une étape E1,
-    *   un courriel au directeur sera envoyé pour le cycle C1
-    *   un courriel au contrôleur sera pour le cycle C2.
+    *   un courriel sera envoyé au directeur pour le cycle C1
+    *   un courriel sera envoyé au contrôleur pour le cycle C2.
 
 De plus chacun des *documents workflow* possède sa propre définition de droits.
 Ainsi, ce ne sont pas les mêmes acteurs qui jouent les différents rôles de
@@ -102,8 +102,8 @@ si `nr` n'est pas positionné à `true`, alors une confirmation est demandée.
 Cette confirmation demande la raison de la transition. Cette raison est
 facultative.
 
-Cette raison est affichée dans le même fenêtre que les paramètres de
-transition. Elle est enregistré dans l'historique du document.
+Cette raison est affichée dans la même fenêtre que les paramètres de
+transition. Elle est enregistrée dans l'historique du document.
 
 ### `m1` {#core-ref:603b0905-6269-4dca-a656-55e1d5524c3a}
 

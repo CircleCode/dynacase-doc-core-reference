@@ -9,7 +9,7 @@ Les cycles de vie se paramètrent en 4 étapes :
     [propriétés de famille][family_prop])
 
 En effet, lors de l'importation de la famille de workflow, de nombreux attributs
-pour chaque état et chaque transition seront crées. Ces attributs vont permettre
+pour chaque état et chaque transition sont crées. Ces attributs vont permettre
 de définir le paramétrage avancé pour chacun de ces éléments (couleur de l'état,
 envoi de courriel automatique, droits, etc.).
 

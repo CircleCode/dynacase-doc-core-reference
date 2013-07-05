@@ -12,4 +12,4 @@ Il est possible de :
 
 <!--links -->
 [doc_setState]: #core-ref:c4b38315-9847-45c0-9e1d-b2ac92d4efc0
-[doc_setState]: #core-ref:09cc14aa-8400-4dd2-a52e-644bb1e30477
+[doc_getState]: #core-ref:09cc14aa-8400-4dd2-a52e-644bb1e30477

@@ -146,7 +146,7 @@ L'`état`
 :   Il désigne le statut du document.
     
     On parle d'état lorsque le document est inerte, soit parce que l'on consulte
-    des anciennes révisions du document soit parce qu'on est est sur un état
+    des anciennes révisions du document soit parce qu'on est sur un état
     final. Il est à noter qu'ici, *final* ne désigne pas forcément un état en
     bout de cycle, mais plutôt un état pour lequel il n'y a rien à faire. Dans
     notre exemple, *diffusé* est un état *final*, sans activité, car le document

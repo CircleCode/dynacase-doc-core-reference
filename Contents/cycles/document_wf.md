@@ -14,7 +14,7 @@ Il est possible de paramétrer :
 *   la famille à utiliser pour le [profilage dynamique][dynprof]
 *   pour chaque étape
     *   le profil à appliquer aux documents à cette étape
-    *   le masque à appliquer aux document à cette étape
+    *   le masque à appliquer aux documents à cette étape
     *   la couleur de cette étape
     *   le contrôle de vue à appliquer aux documents à cette étape
     *   les mails à envoyer lorsqu'un document arrive dans cette étape
